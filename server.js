@@ -17,14 +17,14 @@ var requestHandler = function(request, response)
    */
   var parsedUrl = url.parse(request.url);
   
-  if(request.method == 'GET' && parsedUrl.pathname == '/listings')
+  if(request.method == 'GET' && parsedUrl.pathname == '/listings')//Response only if GET is used and a precise path
   {
     response.writeHead(200, {'Content-Type': 'application/json'});
     response.end(listingData);
   }
   else
   {
-    response.writeHead(404);
+    response.writeHead(404);//Write 404 in the head for error
     response.end('Bad gateway error');
   }
 };
@@ -35,7 +35,7 @@ server = http.createServer(requestHandler).listen(port,
     console.log('server listening on: http://localhost:'+ port);
   });
 
-fs.readFile('listings.json', 'utf8', function(err, data) 
+fs.readFile('listings.json', 'utf8', function(err, data) //asynchronous call to read a file
 {
 /*
   This callback function should save the data in the listingData variable, 
