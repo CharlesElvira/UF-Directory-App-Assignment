@@ -24,6 +24,11 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 		$scope.listings.push(JSON.parse(entry));
 	};
     $scope.deleteListing = function(index) {};
-    $scope.showDetails = function(index) {};
+    $scope.showDetails = function(index)
+	{
+		$scope.detailedInfo=[];
+		$scope.detailedInfo.coordinates = $scope.listings[index].coordinates;
+		$scope.detailedInfo.address = $scope.listings[index].address;
+	};
   }
 ]);
