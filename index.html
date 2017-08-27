@@ -18,7 +18,7 @@
 
               -->
             <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" placeholder="Search" ng-model="inputText">
           </div>
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
@@ -26,6 +26,10 @@
                 <th>Code</th>
                 <th>Building Name</th>
                 <th></th>
+				<tr ng-repeat="list in listings | filter:inputText">
+				<th>{{ list.code }}</th>
+				<th>{{ list.name }}</th>
+				</tr>
               </tr>
               <!-- 
 
@@ -41,6 +45,26 @@
               Write an HTML form that adds new listings to the directory 
 
             -->
+			<form name="newForm" ng-submit=addListing()>
+			<label>
+				Code: 
+				<input type="text" name="code" ng-model="newListing.code" required>
+			</label>
+			<label>
+				Building Name: 
+				<input type="text" name="name" ng-model="newListing.name" required>
+			</label>
+			<label>
+				Coordinates: 
+					Latitude: <input type="text" name="lat" ng-model="newListing.latitude">
+					Longitute: <input type="text" name="long" ng-model="newListing.longitude">
+			</label>
+			<label>
+				Address: 
+				<input type="text" name="add" ng-model="newListing.address">
+			</label>
+			<input type="submit" value="Add listing" >
+			</form>
         </div>
         <div class="col-md-6">
           <div class="jumbotron">
