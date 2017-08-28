@@ -23,7 +23,10 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 		entry += ' }';
 		$scope.listings.push(JSON.parse(entry));
 	};
-    $scope.deleteListing = function(index) {};
+    $scope.deleteListing = function(index)
+	{
+		$scope.listings.splice(index,1);
+	};
     $scope.showDetails = function(index)
 	{
 		$scope.detailedInfo=[];
