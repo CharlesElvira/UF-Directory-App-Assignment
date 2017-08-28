@@ -13,8 +13,8 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 		
 		code = $scope.newListing.code;
 		name = $scope.newListing.name;
-		lat = $scope.newListing.latitude;
-		lon = $scope.newListing.longitude;
+		lat = parseFloat($scope.newListing.latitude);
+		lon = parseFloat($scope.newListing.longitude);
 		add = $scope.newListing.address;
 		
 		entry = '{ "code": "' + code + '", "name": "' + name + '"';
