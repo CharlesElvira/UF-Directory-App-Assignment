@@ -23,58 +23,15 @@ mongoose.connect(config.db.uri);
   it saved everything correctly. 
  */
  fs.readFile('listings.json','utf8',function(err,data){
-	listingData = JSON.parse(data);
-	listingData = listingData.entries;
-	for(var i=0; i<listingData.length; i++)
+	listingData = JSON.parse(data).entries;
+	listingData.forEach(function(newlisting)
 	{
-		if(listingData.hasOwnProperty('coordinates') && listingData.hasOwnProperty('address'))
+		let newList= new Listing(newlisting);
+		newList.save(function(err)
 		{
-			newlisting = new Listing
-			({
-				name: listingData[i].name,
-				code: listingData[i].code,
-				coordinates:
-				{
-					latitude: listingData[i].coordinates.latitude,
-					longitude: listingData[i].coordinates.longitude
-				},
-				address: listingData[i].address
-			}); 
-			newlisting.save();
-		}
-		else if(listingData.hasOwnProperty('address'))
-		{
-			newlisting = new Listing
-			({
-				name: listingData[i].name,
-				code: listingData[i].code,
-				address: listingData[i].address
-			}); 
-			newlisting.save();
-		}
-		else if(listingData.hasOwnProperty('coordinates'))
-		{
-			newlisting = new Listing
-			({
-				name: listingData[i].name,
-				code: listingData[i].code,
-				coordinates:
-				{
-					latitude: listingData[i].coordinates.latitude,
-					longitude: listingData[i].coordinates.longitude
-				}
-			}); 
-			newlisting.save();
-		}
-		else
-		{
-			newlisting = new Listing
-			({
-				name: listingData[i].name,
-				code: listingData[i].code
-			}); 
-			newlisting.save();
-		}
-	};
-});
+			if (err) throw err
+		
+		});
+	});
+ });
 mongoose.connection.close();
