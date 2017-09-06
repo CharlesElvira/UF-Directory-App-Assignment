@@ -8,6 +8,12 @@ var fs = require('fs'),
     Schema = mongoose.Schema, 
     Listing = require('./ListingSchema.js'), 
     config = require('./config');
+var listing;
+fs.readFile('listing.json','utf8',function(err,data)
+{
+	listing = data;
+});
+
 
 /* Connect to your database */
 mongoose.db.connect(config.db.uri);
@@ -16,7 +22,11 @@ mongoose.db.connect(config.db.uri);
   and then save it to your Mongo database 
  */
 new Listing{(
-
+	id: listing._id,
+	name: listing.name,
+	code: listing.code,
+	coordinates: {latitude: listing.coordinates.latitude, longitude: listing.coordinates.longitude},
+	address: listing.address;
 )};
 
 /* 

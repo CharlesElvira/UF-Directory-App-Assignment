@@ -10,8 +10,8 @@ var listingSchema = new Schema({
   name:{type: String, required: true},
   coordinates:
 	{
-		latitute: {type: Number},
-		longitute: {type: Number}
+		latitude: {type: Number},
+		longitude: {type: Number}
 	},
   address: {type: String},
   created_at: Date,
