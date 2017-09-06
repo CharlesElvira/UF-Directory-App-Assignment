@@ -27,7 +27,6 @@ mongoose.connect(config.db.uri);
 	listingData = listingData.entries;
 	for(var i=0; i<listingData.length; i++)
 	{
-		console.log(i);
 		if(listingData.hasOwnProperty('coordinates') && listingData.hasOwnProperty('address'))
 		{
 			newlisting = new Listing
@@ -78,3 +77,4 @@ mongoose.connect(config.db.uri);
 		}
 	};
 });
+mongoose.connection.close();
